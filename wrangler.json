@@ -1,0 +1,10 @@
+{
+	"assets": {
+		"binding": "ASSETS",
+		"directory": "./build/client/"
+	},
+	"compatibility_date": "2024-11-18",
+	"main": "./build/server/index.js",
+	"name": "shiki-markdoc-app",
+	"workers_dev": true
+}

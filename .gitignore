@@ -1,10 +1,11 @@
 .DS_Store
-/node_modules/
-
-# React Router
-/.react-router/
-/build/
-
-# Cloudflare
-.mf
-.wrangler
+.dev.vars
+.dev.vars.json
+.env
+.envrc
+.react-router/
+.tool-versions
+.worktrees/
+.wrangler/
+build/
+node_modules/
