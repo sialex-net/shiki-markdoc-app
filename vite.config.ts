@@ -1,49 +1,46 @@
-import { vitePluginViteNodeMiniflare } from "@hiogawa/vite-node-miniflare";
-import { reactRouter } from "@react-router/dev/vite";
-import autoprefixer from "autoprefixer";
-import tailwindcss from "tailwindcss";
-import { defineConfig } from "vite";
-import tsconfigPaths from "vite-tsconfig-paths";
+import { reactRouter } from '@react-router/dev/vite';
+import { cloudflareDevProxy } from '@react-router/dev/vite/cloudflare';
+import autoprefixer from 'autoprefixer';
+import tailwindcss from 'tailwindcss';
+import { defineConfig } from 'vite';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig(({ isSsrBuild }) => ({
-  build: {
-    rollupOptions: isSsrBuild
-      ? {
-          input: "./workers/app.ts",
-        }
-      : undefined,
-  },
-  css: {
-    postcss: {
-      plugins: [tailwindcss, autoprefixer],
-    },
-  },
-  ssr: {
-    target: "webworker",
-    noExternal: true,
-    resolve: {
-      conditions: ["workerd", "browser"],
-    },
-    optimizeDeps: {
-      include: [
-        "react",
-        "react/jsx-runtime",
-        "react/jsx-dev-runtime",
-        "react-dom",
-        "react-dom/server",
-        "react-router",
-      ],
-    },
-  },
-  plugins: [
-    vitePluginViteNodeMiniflare({
-      entry: "./workers/app.ts",
-      miniflareOptions: (options) => {
-        options.compatibilityDate = "2024-11-18";
-        options.compatibilityFlags = ["nodejs_compat"];
-      },
-    }),
-    reactRouter(),
-    tsconfigPaths(),
-  ],
+	build: {
+		rollupOptions: isSsrBuild
+			? {
+					input: './workers/app.ts',
+				}
+			: undefined,
+	},
+	css: {
+		postcss: {
+			plugins: [tailwindcss, autoprefixer],
+		},
+	},
+	plugins: [
+		cloudflareDevProxy({
+			getLoadContext({ context }) {
+				return { cloudflare: context.cloudflare };
+			},
+		}),
+		reactRouter(),
+		tsconfigPaths(),
+	],
+	ssr: {
+		optimizeDeps: {
+			include: [
+				'react',
+				'react/jsx-runtime',
+				'react/jsx-dev-runtime',
+				'react-dom',
+				'react-dom/server',
+				'react-router',
+			],
+		},
+		resolve: {
+			conditions: ['workerd', 'browser'],
+		},
+		target: 'webworker',
+	},
 }));
