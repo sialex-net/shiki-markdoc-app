@@ -16,8 +16,11 @@
 	},
 	"packageManager": "pnpm@9.15.0",
 	"dependencies": {
+		"@fontsource/jetbrains-mono": "^5.1.2",
+		"@markdoc/markdoc": "^0.4.0",
 		"@react-router/node": "^7.1.1",
 		"@react-router/serve": "^7.1.1",
+		"clsx": "^2.1.1",
 		"isbot": "^5.1.18",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
@@ -26,6 +29,7 @@
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
 		"@react-router/dev": "^7.1.1",
+		"@tailwindcss/typography": "^0.5.15",
 		"@types/node": "^22.10.2",
 		"@types/react": "^19.0.2",
 		"@types/react-dom": "^19.0.2",

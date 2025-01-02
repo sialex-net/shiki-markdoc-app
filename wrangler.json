@@ -6,5 +6,11 @@
 	"compatibility_date": "2024-11-18",
 	"main": "./build/server/index.js",
 	"name": "shiki-markdoc-app",
+	"services": [
+		{
+			"binding": "SHIKI_MARKDOC_SERVICE",
+			"service": "shiki-markdoc-worker"
+		}
+	],
 	"workers_dev": true
 }

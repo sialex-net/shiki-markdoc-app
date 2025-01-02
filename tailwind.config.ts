@@ -1,11 +1,14 @@
+import typography from '@tailwindcss/typography';
 import type { Config } from 'tailwindcss';
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 export default {
 	content: ['./app/**/{**,.client,.server}/**/*.{js,jsx,ts,tsx}'],
-	plugins: [],
+	plugins: [typography()],
 	theme: {
 		extend: {
 			fontFamily: {
+				mono: ['"JetBrains Mono"', ...defaultTheme.fontFamily.mono],
 				sans: [
 					'"Inter"',
 					'ui-sans-serif',
