@@ -2,4 +2,6 @@
 
 interface Env {
 	ASSETS: Fetcher;
+	AUTH_KEY: string;
+	SHIKI_MARKDOC_SERVICE: Fetcher;
 }

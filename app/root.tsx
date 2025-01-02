@@ -1,4 +1,5 @@
 import {
+	Link,
 	Links,
 	Meta,
 	Outlet,
@@ -36,7 +37,36 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-	return <Outlet />;
+	const navLinks = [
+		{ name: 'Shiki and Markdoc', to: '/markdoc' },
+		{ name: 'Pure Shiki', to: '/shiki' },
+	];
+
+	return (
+		<>
+			<header className='mx-auto flex justify-center py-8'>
+				<nav>
+					{
+						<ul className='flex gap-x-16'>
+							{navLinks.map((nL) => (
+								<li key={nL.name}>
+									<Link
+										className='underline hover:no-underline'
+										to={nL.to}
+									>
+										{nL.name}
+									</Link>
+								</li>
+							))}
+						</ul>
+					}
+				</nav>
+			</header>
+			<main className='mx-auto max-w-screen-sm'>
+				<Outlet />
+			</main>
+		</>
+	);
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
