@@ -1,71 +1,68 @@
-# Welcome to React Router!
+# Shiki syntax highlighting on Cloudflare Workers platform
 
-A modern, production-ready template for building full-stack React applications using React Router.
+An edge implementation of Shiki syntax highlighting, made with:
 
-## Features
+- Shiki JavaScript Engine
+- Markdoc
+- React Router 7
+- Cloudflare Workers
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+This project has two main pieces:
+
+- Service worker providing on-demand syntax highlighting ([sialex-net/shiki-markdoc-worker](https://github.com/sialex-net/shiki-markdoc-worker))
+- Client app (this repo)
+
+They are connected by [service binding](https://developers.cloudflare.com/workers/runtime-apis/bindings/service-bindings/).
 
 ## Getting Started
 
 ### Installation
 
-Install the dependencies:
+Install dependencies:
 
 ```bash
-npm install
+pnpm install
 ```
 
-### Development
-
-Start the development server with HMR:
+Get Workers runtime types:
 
 ```bash
-npm run dev
+pnpm cf:typegen
 ```
 
-Your application will be available at `http://localhost:5173`.
+Set up `AUTH_KEY`. See included project files for details:
 
-## Building for Production
-
-Create a production build:
-
-```bash
-npm run build
-```
+- `.example.dev.vars`
+- `.example.dev.vars.json`
 
 ## Deployment
 
-Deployment is done using the Wrangler CLI.
+### Service Worker
 
-To deploy directly to production:
+Deploy to Cloudflare:
 
-```sh
-npx wrangler deploy
+```bash
+pnpm cf:deploy
 ```
 
-To deploy a preview URL:
+Upload `AUTH_KEY` to Cloudflare:
 
-```sh
-npx wrangler versions upload
+```bash
+pnpm cf:secrets
 ```
 
-You can then promote a version to production after verification or roll it out progressively.
+### Client App
 
-```sh
-npx wrangler versions deploy
+Deploy to Cloudflare:
+
+```bash
+pnpm cf:deploy
 ```
 
-## Styling
+Upload `AUTH_KEY` to Cloudflare:
 
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+```bash
+pnpm cf:secrets
+```
 
----
-
-Built with ❤️ using React Router.
+That's it!
