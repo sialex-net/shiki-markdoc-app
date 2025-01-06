@@ -57,7 +57,8 @@ Something important:
 
 Content...
 
-\`\`\`ts {\% path="example.ts" %}
+\`\`\`ts {\% path="example-1.ts" %}
+// from typescript docs
 interface Home {
   readonly resident: { name: string; age: number };
 }
@@ -80,4 +81,32 @@ Cannot assign to 'resident' because it is a read-only property. // [!code highli
 \`\`\`
 
 Content...
+
+
+\`\`\`ts {\% path="example-2.ts" %}
+// from typescript docs
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d; // [!code highlight]
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+function LogMethod(target, propertyKey, descriptor) {
+    console.log(target);
+    console.log(propertyKey);
+    console.log(descriptor);
+}
+class Demo {
+    foo(bar) { // [!code --]
+    foo(baz) { // [!code ++]
+
+        // do nothing // [!code highlight]
+    }
+}
+__decorate([
+    LogMethod
+], Demo.prototype, "foo", null);
+const demo = new Demo();
+\`\`\`
 `;

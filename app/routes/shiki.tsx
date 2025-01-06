@@ -38,7 +38,8 @@ export default function Component({ loaderData }: Route.ComponentProps) {
 	);
 }
 
-const code = `import {useReducer} from 'react';
+const code = `// from react docs
+import {useReducer} from 'react';
 
 interface State {
    count: number 
